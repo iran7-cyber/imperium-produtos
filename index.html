@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Araujo Barbearia</title>
+  <style>
+    :root {
+      --bg: #12100d;
+      --bg-2: #1d1915;
+      --panel: rgba(24, 20, 17, 0.9);
+      --gold: #d7b26a;
+      --gold-2: #f3d69a;
+      --text: #f7f2eb;
+      --muted: #d4c6b7;
+      --line: rgba(255,255,255,0.09);
+      --shadow: 0 20px 40px rgba(0,0,0,0.35);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        linear-gradient(rgba(0,0,0,0.62), rgba(0,0,0,0.62)),
+        url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1600&q=80') center/cover fixed no-repeat;
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(18, 16, 13, 0.75);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav {
+      min-height: 75px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .brand-mark {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-2), var(--gold));
+      box-shadow: 0 0 18px rgba(215,178,106,0.8);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      padding: 14px 22px;
+      font-weight: 700;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(215,178,106,0.24);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), var(--gold-2));
+      color: #1a130d;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.02);
+      border-color: rgba(255,255,255,0.1);
+      color: var(--text);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 36px;
+      align-items: center;
+      padding: 90px 0 70px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(215,178,106,0.35);
+      background: rgba(215,178,106,0.08);
+      color: var(--gold-2);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      letter-spacing: -0.05em;
+      line-height: 0.95;
+    }
+
+    .gold {
+      color: var(--gold-2);
+    }
+
+    .hero p {
+      margin: 0 0 30px;
+      max-width: 600px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.8;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .stat {
+      min-width: 136px;
+      padding: 18px 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+    }
+
+    .stat strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--gold-2);
+      font-size: 1.5rem;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .hero-card {
+      position: relative;
+      background: rgba(16, 13, 11, 0.8);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      right: -70px;
+      top: -60px;
+      background: radial-gradient(circle, rgba(215,178,106,0.24), transparent 68%);
+    }
+
+    .barber-visual {
+      position: relative;
+      min-height: 430px;
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+    }
+
+    .barber-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.9) contrast(1.05);
+    }
+
+    .floating-box {
+      position: absolute;
+      left: 20px;
+      bottom: 20px;
+      background: rgba(17,14,12,0.92);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 14px 16px;
+      border-radius: 18px;
+      min-width: 180px;
+    }
+
+    .floating-box strong {
+      display: block;
+      color: var(--gold-2);
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+
+    .floating-box span {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .section {
+      padding: 72px 0;
+    }
+
+    .section-head {
+      margin-bottom: 28px;
+      text-align: center;
+    }
+
+    .section-head h2 {
+      margin: 0 0 12px;
+      font-size: clamp(2.1rem, 4vw, 3rem);
+      letter-spacing: -0.04em;
+    }
+
+    .section-head p {
+      max-width: 700px;
+      margin: 0 auto;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .service-card {
+      background: rgba(17,14,12,0.8);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 28px 22px;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(215,178,106,0.7);
+    }
+
+    .icon-box {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, rgba(215,178,106,0.15), rgba(255,255,255,0.04));
+      border: 1px solid rgba(215,178,106,0.25);
+      margin-bottom: 18px;
+    }
+
+    .service-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.35rem;
+    }
+
+    .service-card p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .price {
+      color: var(--gold-2);
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .about-card,
+    .booking-card,
+    .review {
+      background: rgba(17,14,12,0.8);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 28px;
+    }
+
+    .about-card p,
+    .booking-card p,
+    .review p {
+      color: var(--muted);
+      margin: 0 0 18px;
+      line-height: 1.8;
+    }
+
+    .check-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .check-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+    }
+
+    .check-list li::before {
+      content: "✓";
+      color: var(--gold-2);
+      font-size: 1.1rem;
+    }
+
+    .team-photo {
+      width: 100%;
+      min-height: 420px;
+      object-fit: cover;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+    }
+
+    .reviews {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .stars {
+      color: var(--gold-2);
+      letter-spacing: 0.15em;
+      margin-bottom: 16px;
+      font-size: 1.05rem;
+    }
+
+    .person {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      color: #1b130d;
+      background: linear-gradient(135deg, var(--gold), var(--gold-2));
+    }
+
+    .booking {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .booking-card h3 {
+      margin: 0 0 12px;
+      font-size: 2rem;
+    }
+
+    .hours {
+      list-style: none;
+      margin: 18px 0 0;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .hours li {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: var(--muted);
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .hours strong {
+      color: var(--text);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 28px 0 48px;
+      border-top: 1px solid var(--line);
+      background: rgba(0,0,0,0.12);
+    }
+
+    @media (max-width: 820px) {
+      .nav-links { display: none; }
+      .hero, .services, .about, .reviews, .booking { grid-template-columns: 1fr; }
+      .hero { padding-top: 62px; }
+    }
+
+    @media (max-width: 520px) {
+      .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .cta-row { flex-direction: column; }
+      .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#top" class="brand" aria-label="Araujo Barbearia home">
+          <span class="brand-mark"></span>
+          Araujo Barbearia
+        </a>
+
+        <div class="nav-links">
+          <a href="#sobre">Sobre</a>
+          <a href="#servicos">Serviços</a>
+          <a href="#avaliacoes">Avaliações</a>
+          <a href="#contato">Contato</a>
+        </div>
+
+        <a href="#contato" class="btn btn-primary">Agendar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="container hero">
+      <div>
+        <span class="eyebrow">Barbearia premium</span>
+        <h1>Estilo, corte e <span class="gold">confiança</span>.</h1>
+        <p>
+          Na Araujo Barbearia, você encontra atendimento de qualidade, ambiente moderno e cortes que realçam a sua personalidade. Aqui a tradição do barbear clássico encontra o visual contemporâneo.
+        </p>
+
+        <div class="cta-row">
+          <a href="#contato" class="btn btn-primary">Agendar horário</a>
+          <a href="#servicos" class="btn btn-secondary">Ver serviços</a>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <strong>5,0</strong>
+            <span>avaliação</span>
+          </div>
+          <div class="stat">
+            <strong>5</strong>
+            <span>avaliações</span>
+          </div>
+          <div class="stat">
+            <strong>19h</strong>
+            <span>fechamento</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="barber-visual">
+          <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=1000&q=80" alt="Cliente em barbearia" />
+          <div class="floating-box">
+            <strong>Aberto</strong>
+            <span>Até às 19:00</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicos" class="container section">
+      <div class="section-head">
+        <h2>Serviços em destaque</h2>
+        <p>Tratamentos feitos com detalhe, foco em acabamento e muito estilo para homens que querem se destacar.</p>
+      </div>
+
+      <div class="services">
+        <article class="service-card">
+          <div class="icon-box">✂️</div>
+          <h3>Corte clássico</h3>
+          <p>Estilo tradicional com acabamento impecável, pensado para valorizar seu rosto e sua personalidade.</p>
+          <div class="price">R$ 45</div>
+        </article>
+
+        <article class="service-card">
+          <div class="icon-box">🧔</div>
+          <h3>Barba modelada</h3>
+          <p>Contorno, acabamento e definição para uma barba moderna, bem alinhada e com muito visual.</p>
+          <div class="price">R$ 35</div>
+        </article>
+
+        <article class="service-card">
+          <div class="icon-box">💈</div>
+          <h3>Combo completo</h3>
+          <p>Corte + barba + cuidado para um visual que transmite confiança e impecabilidade no dia a dia.</p>
+          <div class="price">R$ 80</div>
+        </article>
+      </div>
+    </section>
+
+    <section id="sobre" class="container section">
+      <div class="section-head">
+        <h2>Uma barbearia com identidade</h2>
+        <p>Atendimento com atenção, ambiente acolhedor e serviço que respeita o estilo de cada cliente.</p>
+      </div>
+
+      <div class="about">
+        <div class="about-card">
+          <p>A Araujo Barbearia nasceu para atender homens que valorizam cortes bem feitos, barba modelada e um ambiente que transmite conforto e confiança. Nossa missão é oferecer um atendimento acolhedor com o padrão de excelência que seu visual merece.</p>
+
+          <ul class="check-list">
+            <li>Atendimento personalizado</li>
+            <li>Ambiente moderno e confortável</li>
+            <li>Profissionais experientes</li>
+            <li>Produtos de qualidade</li>
+          </ul>
+        </div>
+
+        <img class="team-photo" src="https://images.unsplash.com/photo-1621605815971-fbc98d0ae3df?auto=format&fit=crop&w=1200&q=80" alt="Equipe da barbearia" />
+      </div>
+    </section>
+
+    <section id="avaliacoes" class="container section">
+      <div class="section-head">
+        <h2>O que dizem sobre nós</h2>
+        <p>Clientes que conhecem a barbearia destacam o cuidado no atendimento e a qualidade dos serviços.</p>
+      </div>
+
+      <div class="reviews">
+        <article class="review">
+          <div class="stars">★★★★★</div>
+          <p>“Atendimento excelente, ambiente muito bom e corte impecável. Me senti muito bem atendido.”</p>
+          <div class="person">
+            <div class="avatar">A</div>
+            <strong>André</strong>
+          </div>
+        </article>
+
+        <article class="review">
+          <div class="stars">★★★★★</div>
+          <p>“Barba modelada com muito cuidado e corte moderno. O melhor da região sem dúvida.”</p>
+          <div class="person">
+            <div class="avatar">J</div>
+            <strong>João</strong>
+          </div>
+        </article>
+
+        <article class="review">
+          <div class="stars">★★★★★</div>
+          <p>“Ambiente descontraído, atendimento profissional e resultado muito acima do esperado.”</p>
+          <div class="person">
+            <div class="avatar">M</div>
+            <strong>Mateus</strong>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contato" class="container section">
+      <div class="booking">
+        <div class="booking-card">
+          <h3>Agende seu horário</h3>
+          <p>Seja para um corte clássico, barba modelada ou um combo completo, estamos prontos para atender você com estilo e excelência.</p>
+          <a href="tel:+5588999570760" class="btn btn-primary">(88) 99957-0760</a>
+        </div>
+
+        <div class="booking-card">
+          <h3>Localização</h3>
+          <p>R. Santa Rosa, 128 - Centro, Parambu - CE, 63680-000</p>
+          <ul class="hours">
+            <li><span>Segunda a Sexta</span> <strong>08:00 - 19:00</strong></li>
+            <li><span>Sábado</span> <strong>08:00 - 16:00</strong></li>
+            <li><span>Domingo</span> <strong>Fechado</strong></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 Araujo Barbearia — estilo com tradição.
+  </footer>
+</body>
+</html>
