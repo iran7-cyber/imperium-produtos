@@ -1,624 +1,535 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Araujo Barbearia</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b10">
+  <meta name="description" content="Catálogo Imperium Detail's: produtos para lavagem, cuidado e detalhamento automotivo.">
+  <title>Imperium Detail's | Catálogo automotivo</title>
   <style>
     :root {
-      --bg: #12100d;
-      --bg-2: #1d1915;
-      --panel: rgba(24, 20, 17, 0.9);
-      --gold: #d7b26a;
-      --gold-2: #f3d69a;
-      --text: #f7f2eb;
-      --muted: #d4c6b7;
-      --line: rgba(255,255,255,0.09);
-      --shadow: 0 20px 40px rgba(0,0,0,0.35);
+      --night: #090b10;
+      --panel: #11151d;
+      --panel-2: #171c26;
+      --white: #f5f6f8;
+      --muted: #9aa2b0;
+      --blue: #1768f5;
+      --gold: #f5b526;
+      --line: rgb(255 255 255 / 10%);
+      --page: 1160px;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: var(--white);
+      background: var(--night);
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
     }
 
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background:
-        linear-gradient(rgba(0,0,0,0.62), rgba(0,0,0,0.62)),
-        url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1600&q=80') center/cover fixed no-repeat;
-      color: var(--text);
-      min-height: 100vh;
-    }
+    html { scroll-behavior: smooth; scroll-padding-top: 85px; }
+    body { margin: 0; min-width: 320px; background: var(--night); }
+    a { color: inherit; }
+    button, input { font: inherit; }
+    button { color: inherit; }
+    .container { width: min(var(--page), calc(100% - 48px)); margin-inline: auto; }
 
-    a { text-decoration: none; color: inherit; }
-    img { max-width: 100%; display: block; }
-
-    .container {
-      width: min(1120px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: rgba(18, 16, 13, 0.75);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--line);
-    }
-
-    nav {
-      min-height: 75px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 700;
+    .announcement {
+      padding: 9px 18px;
+      background: var(--blue);
+      color: white;
+      font-size: .73rem;
+      font-weight: 750;
+      letter-spacing: .13em;
+      text-align: center;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
     }
-
-    .brand-mark {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold-2), var(--gold));
-      box-shadow: 0 0 18px rgba(215,178,106,0.8);
+    .header {
+      position: sticky;
+      z-index: 10;
+      top: 0;
+      border-bottom: 1px solid var(--line);
+      background: rgba(11, 18, 34, 0.93).93).93);
+      backdrop-filter: blur(14px);
     }
+    .nav { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 25px; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .brand img { width: 52px; height: 52px; border: 1px solid rgb(255 255 255 / 13%); border-radius: 50%; object-fit: cover; }
+    .brand-copy { display: grid; gap: 2px; }
+    .brand-copy strong { font-size: .99rem; font-weight: 850; letter-spacing: .11em; }
+    .brand-copy span { color: var(--muted); font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 29px; }
+    .nav-links a { color: #d3d7de; font-size: .84rem; text-decoration: none; transition: color .2s ease; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links .nav-button { padding: 11px 16px; border: 1px solid rgb(245 181 38 / 55%); color: var(--gold); font-weight: 750; }
 
-    .nav-links {
+    .hero {
+      position: relative;
+      isolation: isolate;
+      min-height: 510px;
       display: flex;
-      gap: 24px;
-      color: var(--muted);
-      font-size: 0.95rem;
+      align-items: center;
+      overflow: hidden;
+      background: #10131a;
     }
-
-    .nav-links a:hover { color: var(--text); }
-
-    .btn {
+    .hero::before {
+      position: absolute;
+      z-index: -2;
+      inset: 0;
+      background: url("assets/imperium-showroom.jpg") center 43% / cover no-repeat;
+      content: "";
+      opacity: .43;
+    }
+    .hero::after {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      background: linear-gradient(90deg, #090b10 1%, rgb(9 11 16 / 93%) 38%, rgb(9 11 16 / 56%) 100%), linear-gradient(0deg, #090b10 0%, transparent 42%);
+      content: "";
+    }
+    .hero-content { max-width: 750px; padding-block: 84px 90px; }
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--gold);
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { width: 28px; height: 2px; background: var(--blue); content: ""; }
+    h1 { margin: 24px 0 17px; font-size: clamp(2.9rem, 7vw, 5.5rem); font-weight: 900; line-height: .96; letter-spacing: -.065em; }
+    h1 span { color: var(--gold); }
+    .hero p { max-width: 575px; margin: 0; color: #c0c6d0; font-size: 1.03rem; line-height: 1.8; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 29px; }
+    .button {
+      min-height: 48px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      padding: 14px 22px;
-      font-weight: 700;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 28px rgba(215,178,106,0.24);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--gold), var(--gold-2));
-      color: #1a130d;
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,0.02);
-      border-color: rgba(255,255,255,0.1);
-      color: var(--text);
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 36px;
-      align-items: center;
-      padding: 90px 0 70px;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(215,178,106,0.35);
-      background: rgba(215,178,106,0.08);
-      color: var(--gold-2);
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 18px;
-    }
-
-    h1 {
-      margin: 0 0 18px;
-      font-size: clamp(2.8rem, 5vw, 5rem);
-      letter-spacing: -0.05em;
-      line-height: 0.95;
-    }
-
-    .gold {
-      color: var(--gold-2);
-    }
-
-    .hero p {
-      margin: 0 0 30px;
-      max-width: 600px;
-      color: var(--muted);
-      font-size: 1.08rem;
-      line-height: 1.8;
-    }
-
-    .cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-bottom: 32px;
-    }
-
-    .stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
-    }
-
-    .stat {
-      min-width: 136px;
-      padding: 18px 20px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-    }
-
-    .stat strong {
-      display: block;
-      margin-bottom: 6px;
-      color: var(--gold-2);
-      font-size: 1.5rem;
-    }
-
-    .stat span {
-      color: var(--muted);
-      font-size: 0.84rem;
-    }
-
-    .hero-card {
-      position: relative;
-      background: rgba(16, 13, 11, 0.8);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-      padding: 20px;
-      overflow: hidden;
-    }
-
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      width: 260px;
-      height: 260px;
-      right: -70px;
-      top: -60px;
-      background: radial-gradient(circle, rgba(215,178,106,0.24), transparent 68%);
-    }
-
-    .barber-visual {
-      position: relative;
-      min-height: 430px;
-      overflow: hidden;
-      border-radius: 22px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-    }
-
-    .barber-visual img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: saturate(0.9) contrast(1.05);
-    }
-
-    .floating-box {
-      position: absolute;
-      left: 20px;
-      bottom: 20px;
-      background: rgba(17,14,12,0.92);
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 14px 16px;
-      border-radius: 18px;
-      min-width: 180px;
-    }
-
-    .floating-box strong {
-      display: block;
-      color: var(--gold-2);
-      font-size: 1.2rem;
-      margin-bottom: 4px;
-    }
-
-    .floating-box span {
-      color: var(--muted);
-      font-size: 0.82rem;
-    }
-
-    .section {
-      padding: 72px 0;
-    }
-
-    .section-head {
-      margin-bottom: 28px;
-      text-align: center;
-    }
-
-    .section-head h2 {
-      margin: 0 0 12px;
-      font-size: clamp(2.1rem, 4vw, 3rem);
-      letter-spacing: -0.04em;
-    }
-
-    .section-head p {
-      max-width: 700px;
-      margin: 0 auto;
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
-    .services {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 22px;
-    }
-
-    .service-card {
-      background: rgba(17,14,12,0.8);
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: 28px 22px;
-      transition: transform 0.25s ease, border-color 0.25s ease;
-    }
-
-    .service-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(215,178,106,0.7);
-    }
-
-    .icon-box {
-      width: 56px;
-      height: 56px;
-      border-radius: 16px;
-      display: grid;
-      place-items: center;
-      font-size: 1.5rem;
-      background: linear-gradient(135deg, rgba(215,178,106,0.15), rgba(255,255,255,0.04));
-      border: 1px solid rgba(215,178,106,0.25);
-      margin-bottom: 18px;
-    }
-
-    .service-card h3 {
-      margin: 0 0 12px;
-      font-size: 1.35rem;
-    }
-
-    .service-card p {
-      margin: 0 0 18px;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    .price {
-      color: var(--gold-2);
-      font-weight: 700;
-      font-size: 1.1rem;
-    }
-
-    .about {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px;
-      align-items: center;
-    }
-
-    .about-card,
-    .booking-card,
-    .review {
-      background: rgba(17,14,12,0.8);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 28px;
-    }
-
-    .about-card p,
-    .booking-card p,
-    .review p {
-      color: var(--muted);
-      margin: 0 0 18px;
-      line-height: 1.8;
-    }
-
-    .check-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      gap: 12px;
-    }
-
-    .check-list li {
-      display: flex;
-      align-items: center;
       gap: 10px;
-      font-weight: 600;
+      padding: 0 19px;
+      border: 1px solid var(--blue);
+      background: var(--blue);
+      color: white;
+      font-size: .83rem;
+      font-weight: 800;
+      text-decoration: none;
+      transition: transform .18s ease, background .18s ease;
     }
+    .button:hover { transform: translateY(-2px); background: #0756df; }
+    .button-outline { border-color: rgb(255 255 255 / 32%); background: transparent; }
+    .button-outline:hover { background: rgb(255 255 255 / 8%); }
 
-    .check-list li::before {
-      content: "✓";
-      color: var(--gold-2);
-      font-size: 1.1rem;
-    }
+    .trust-row { border-block: 1px solid var(--line); background: #0e1118; }
+    .trust-items { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .trust-item { display: flex; align-items: center; justify-content: center; gap: 11px; min-height: 82px; padding: 17px; color: #d8dce3; font-size: .8rem; font-weight: 700; }
+    .trust-item + .trust-item { border-left: 1px solid var(--line); }
+    .trust-icon { width: 32px; height: 32px; display: grid; place-items: center; border: 1px solid rgb(245 181 38 / 34%); color: var(--gold); }
 
-    .team-photo {
-      width: 100%;
-      min-height: 420px;
-      object-fit: cover;
-      border-radius: 24px;
+    .catalog { padding-block: 86px 100px; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 25px; margin-bottom: 29px; }
+    h2 { margin: 13px 0 0; font-size: clamp(2.1rem, 4vw, 3.35rem); font-weight: 850; letter-spacing: -.055em; }
+    .section-heading p { max-width: 400px; margin: 0 0 4px; color: var(--muted); font-size: .89rem; line-height: 1.7; }
+    .catalog-tools { display: grid; grid-template-columns: minmax(210px, 1fr) auto; align-items: center; gap: 19px; margin-bottom: 22px; }
+    .search { position: relative; }
+    .search svg { position: absolute; top: 50%; left: 15px; color: #8c95a4; transform: translateY(-50%); pointer-events: none; }
+    .search input { width: 100%; height: 47px; padding: 0 15px 0 44px; border: 1px solid var(--line); border-radius: 0; outline: none; background: #10141c; color: white; font-size: .86rem; }
+    .search input::placeholder { color: #7f8794; }
+    .search input:focus { border-color: var(--blue); }
+    .result-count { color: var(--muted); font-size: .78rem; white-space: nowrap; }
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+    .filter {
+      min-height: 36px;
+      padding: 0 13px;
       border: 1px solid var(--line);
+      background: transparent;
+      color: #b7bdc8;
+      cursor: pointer;
+      font-size: .74rem;
+      font-weight: 750;
+      transition: color .18s ease, background .18s ease, border-color .18s ease;
     }
-
-    .reviews {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 22px;
-    }
-
-    .stars {
-      color: var(--gold-2);
-      letter-spacing: 0.15em;
-      margin-bottom: 16px;
-      font-size: 1.05rem;
-    }
-
-    .person {
+    .filter:hover, .filter.active { border-color: var(--blue); background: var(--blue); color: white; }
+    .product-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 17px; }
+    .product-card {
+      min-width: 0;
       display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-top: 18px;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
     }
+    .product-card:hover { transform: translateY(-4px); border-color: rgb(23 104 245 / 65%); box-shadow: 0 15px 32px rgb(0 0 0 / 22%); }
+    .product-card[hidden] { display: none; }
+    .product-photo { position: relative; height: 245px; overflow: hidden; background: #e8e5e0; }
+    .product-photo img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .35s ease; }
+    .product-card:hover .product-photo img { transform: scale(1.045); }
+    .product-badge { position: absolute; top: 12px; left: 12px; padding: 7px 9px; background: rgb(9 11 16 / 86%); color: var(--gold); font-size: .61rem; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
+    .product-info { display: flex; flex: 1; flex-direction: column; padding: 16px 16px 15px; }
+    .product-brand { color: #8590a1; font-size: .63rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+    .product-info h3 { margin: 7px 0 8px; font-size: 1.01rem; font-weight: 800; letter-spacing: -.02em; }
+    .product-info p { min-height: 41px; margin: 0; color: #aab1bd; font-size: .77rem; line-height: 1.6; }
+    .product-bottom { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 17px; padding-top: 13px; border-top: 1px solid var(--line); }
+    .size { color: #d9dde4; font-size: .72rem; font-weight: 700; }
+    .price { color: var(--gold); font-size: .69rem; font-weight: 800; text-align: right; }
+    .empty-state { display: none; padding: 54px 20px; border: 1px dashed var(--line); color: var(--muted); text-align: center; }
+    .empty-state.visible { display: block; }
 
-    .avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      font-weight: 700;
-      color: #1b130d;
-      background: linear-gradient(135deg, var(--gold), var(--gold-2));
+    .brands { padding-block: 54px; border-block: 1px solid var(--line); background: #0d1016; }
+    .brands-heading { margin-bottom: 25px; color: var(--muted); font-size: .7rem; font-weight: 800; letter-spacing: .18em; text-align: center; text-transform: uppercase; }
+    .brand-logos { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 14px; }
+    .brand-logos img { width: 145px; height: 92px; border: 1px solid var(--line); background: #050608; object-fit: contain; }
+
+    .contact { padding-block: 80px; }
+    .contact-box { position: relative; overflow: hidden; padding: 42px; border: 1px solid rgb(245 181 38 / 34%); background: linear-gradient(110deg, #171c26, #0d1119); }
+    .contact-box::after { position: absolute; top: -105px; right: -80px; width: 320px; height: 320px; border: 1px solid rgb(23 104 245 / 33%); border-radius: 50%; box-shadow: 0 0 0 35px rgb(23 104 245 / 5%), 0 0 0 70px rgb(23 104 245 / 4%); content: ""; }
+    .contact-box > * { position: relative; z-index: 1; }
+    .contact-box h2 { max-width: 640px; margin-bottom: 12px; }
+    .contact-box p { max-width: 650px; margin: 0; color: #aeb5c0; font-size: .9rem; line-height: 1.75; }
+    .contact-note { margin-top: 22px !important; color: #e1e4e9 !important; font-size: .78rem !important; }
+    .contact-note span { color: var(--gold); }
+    .contact-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: 24px; }
+    .contact-number { color: #e4e7ec; font-size: .88rem; font-weight: 750; text-decoration: none; }
+    .contact-number:hover { color: var(--gold); }
+    .instagram-link { color: var(--gold); font-size: .88rem; font-weight: 750; text-decoration: none; }
+    .instagram-link:hover { color: white; }
+
+    footer { border-top: 1px solid var(--line); background: #07090d; }
+    .footer-row { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .footer-brand { color: var(--white); font-size: .77rem; font-weight: 850; letter-spacing: .13em; text-transform: uppercase; }
+    footer p { margin: 0; color: #858d9a; font-size: .72rem; }
+    .back-top { color: var(--gold); font-size: .74rem; font-weight: 750; text-decoration: none; }
+    :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+    @media (max-width: 980px) {
+      .product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .section-heading { align-items: flex-start; flex-direction: column; }
     }
-
-    .booking {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 24px;
-      align-items: center;
+    @media (max-width: 680px) {
+      .container { width: min(var(--page), calc(100% - 32px)); }
+      .nav { min-height: 68px; }
+      .brand img { width: 44px; height: 44px; }
+      .brand-copy strong { font-size: .83rem; }
+      .nav-links { gap: 13px; }
+      .nav-links a:not(.nav-button) { display: none; }
+      .nav-links .nav-button { padding: 10px 11px; font-size: .74rem; }
+      .hero { min-height: 470px; }
+      .hero::before { background-position: 58% center; }
+      .hero::after { background: linear-gradient(90deg, rgb(9 11 16 / 95%), rgb(9 11 16 / 70%)), linear-gradient(0deg, #090b10, transparent 55%); }
+      .hero-content { padding-block: 68px 74px; }
+      h1 { font-size: clamp(3rem, 13vw, 4.5rem); }
+      .trust-items { grid-template-columns: 1fr; padding-block: 8px; }
+      .trust-item { justify-content: flex-start; min-height: 59px; padding-inline: 5px; }
+      .trust-item + .trust-item { border-top: 1px solid var(--line); border-left: 0; }
+      .catalog { padding-block: 65px 72px; }
+      .catalog-tools { grid-template-columns: 1fr; gap: 10px; }
+      .result-count { justify-self: end; }
+      .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .product-photo { height: clamp(150px, 49vw, 225px); }
+      .product-info { padding: 12px 11px; }
+      .product-info h3 { font-size: .9rem; }
+      .product-info p { min-height: 51px; font-size: .71rem; }
+      .product-bottom { align-items: flex-start; flex-direction: column; gap: 6px; }
+      .price { text-align: left; }
+      .brand-logos { gap: 8px; }
+      .brand-logos img { width: min(29%, 125px); height: 76px; }
+      .contact { padding-block: 60px; }
+      .contact-box { padding: 28px 21px; }
+      .contact-box::after { right: -210px; }
+      .footer-row { align-items: flex-start; flex-direction: column; justify-content: center; padding-block: 19px; }
     }
-
-    .booking-card h3 {
-      margin: 0 0 12px;
-      font-size: 2rem;
-    }
-
-    .hours {
-      list-style: none;
-      margin: 18px 0 0;
-      padding: 0;
-      display: grid;
-      gap: 12px;
-    }
-
-    .hours li {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      color: var(--muted);
-      padding-bottom: 8px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .hours strong {
-      color: var(--text);
-    }
-
-    footer {
-      text-align: center;
-      color: var(--muted);
-      padding: 28px 0 48px;
-      border-top: 1px solid var(--line);
-      background: rgba(0,0,0,0.12);
-    }
-
-    @media (max-width: 820px) {
-      .nav-links { display: none; }
-      .hero, .services, .about, .reviews, .booking { grid-template-columns: 1fr; }
-      .hero { padding-top: 62px; }
-    }
-
-    @media (max-width: 520px) {
-      .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .cta-row { flex-direction: column; }
-      .btn { width: 100%; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <nav>
-        <a href="#top" class="brand" aria-label="Araujo Barbearia home">
-          <span class="brand-mark"></span>
-          Araujo Barbearia
-        </a>
-
-        <div class="nav-links">
-          <a href="#sobre">Sobre</a>
-          <a href="#servicos">Serviços</a>
-          <a href="#avaliacoes">Avaliações</a>
-          <a href="#contato">Contato</a>
-        </div>
-
-        <a href="#contato" class="btn btn-primary">Agendar</a>
-      </nav>
-    </div>
+  <div class="announcement">Produtos automotivos para quem cuida de cada detalhe</div>
+  <header class="header">
+    <nav class="nav container" aria-label="Navegação principal">
+      <a class="brand" href="#inicio" aria-label="Imperium Detail's, início">
+        <img src="assets/imperium-logo.jpg" alt="">
+        <span class="brand-copy"><strong>IMPERIUM</strong><span>Detail's · Produtos automotivos</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="#catalogo">Catálogo</a>
+        <a href="#marcas">Marcas</a>
+        <a class="nav-button" href="https://wa.me/5575998686874?text=Ol%C3%A1%2C%20vim%20pelo%20cat%C3%A1logo%20da%20Imperium%20e%20quero%20consultar%20um%20produto." target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </div>
+    </nav>
   </header>
 
-  <main id="top">
-    <section class="container hero">
-      <div>
-        <span class="eyebrow">Barbearia premium</span>
-        <h1>Estilo, corte e <span class="gold">confiança</span>.</h1>
-        <p>
-          Na Araujo Barbearia, você encontra atendimento de qualidade, ambiente moderno e cortes que realçam a sua personalidade. Aqui a tradição do barbear clássico encontra o visual contemporâneo.
-        </p>
-
-        <div class="cta-row">
-          <a href="#contato" class="btn btn-primary">Agendar horário</a>
-          <a href="#servicos" class="btn btn-secondary">Ver serviços</a>
-        </div>
-
-        <div class="stats">
-          <div class="stat">
-            <strong>5,0</strong>
-            <span>avaliação</span>
-          </div>
-          <div class="stat">
-            <strong>5</strong>
-            <span>avaliações</span>
-          </div>
-          <div class="stat">
-            <strong>19h</strong>
-            <span>fechamento</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-card">
-        <div class="barber-visual">
-          <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=1000&q=80" alt="Cliente em barbearia" />
-          <div class="floating-box">
-            <strong>Aberto</strong>
-            <span>Até às 19:00</span>
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container">
+        <div class="hero-content">
+          <div class="eyebrow">Imperium Detail's</div>
+          <h1>O cuidado certo.<br><span>O resultado aparece.</span></h1>
+          <p>Seu catálogo de produtos para lavagem e detalhamento automotivo. Encontre soluções para limpeza, proteção, acabamento e os detalhes que fazem a diferença.</p>
+          <div class="hero-actions">
+            <a class="button" href="#catalogo">Explorar catálogo <span aria-hidden="true">→</span></a>
+            <a class="button button-outline" href="#marcas">Conhecer as marcas</a>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="servicos" class="container section">
-      <div class="section-head">
-        <h2>Serviços em destaque</h2>
-        <p>Tratamentos feitos com detalhe, foco em acabamento e muito estilo para homens que querem se destacar.</p>
-      </div>
-
-      <div class="services">
-        <article class="service-card">
-          <div class="icon-box">✂️</div>
-          <h3>Corte clássico</h3>
-          <p>Estilo tradicional com acabamento impecável, pensado para valorizar seu rosto e sua personalidade.</p>
-          <div class="price">R$ 45</div>
-        </article>
-
-        <article class="service-card">
-          <div class="icon-box">🧔</div>
-          <h3>Barba modelada</h3>
-          <p>Contorno, acabamento e definição para uma barba moderna, bem alinhada e com muito visual.</p>
-          <div class="price">R$ 35</div>
-        </article>
-
-        <article class="service-card">
-          <div class="icon-box">💈</div>
-          <h3>Combo completo</h3>
-          <p>Corte + barba + cuidado para um visual que transmite confiança e impecabilidade no dia a dia.</p>
-          <div class="price">R$ 80</div>
-        </article>
+    <section class="trust-row" aria-label="Categorias da loja">
+      <div class="trust-items container">
+        <div class="trust-item"><span class="trust-icon" aria-hidden="true">01</span> Lavagem e descontaminação</div>
+        <div class="trust-item"><span class="trust-icon" aria-hidden="true">02</span> Proteção e acabamento</div>
+        <div class="trust-item"><span class="trust-icon" aria-hidden="true">03</span> Acessórios para detalhamento</div>
       </div>
     </section>
 
-    <section id="sobre" class="container section">
-      <div class="section-head">
-        <h2>Uma barbearia com identidade</h2>
-        <p>Atendimento com atenção, ambiente acolhedor e serviço que respeita o estilo de cada cliente.</p>
-      </div>
-
-      <div class="about">
-        <div class="about-card">
-          <p>A Araujo Barbearia nasceu para atender homens que valorizam cortes bem feitos, barba modelada e um ambiente que transmite conforto e confiança. Nossa missão é oferecer um atendimento acolhedor com o padrão de excelência que seu visual merece.</p>
-
-          <ul class="check-list">
-            <li>Atendimento personalizado</li>
-            <li>Ambiente moderno e confortável</li>
-            <li>Profissionais experientes</li>
-            <li>Produtos de qualidade</li>
-          </ul>
+    <section class="catalog container" id="catalogo">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">Seleção Imperium</div>
+          <h2>Catálogo de produtos</h2>
         </div>
-
-        <img class="team-photo" src="https://images.unsplash.com/photo-1621605815971-fbc98d0ae3df?auto=format&fit=crop&w=1200&q=80" alt="Equipe da barbearia" />
+        <p>Explore os itens disponíveis e encontre o produto ideal para cada etapa do cuidado automotivo.</p>
       </div>
+      <div class="catalog-tools">
+        <label class="search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.7"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          <input id="product-search" type="search" placeholder="Buscar produto ou finalidade..." aria-label="Buscar produtos">
+        </label>
+        <span class="result-count" id="result-count" aria-live="polite"></span>
+      </div>
+      <div class="filters" role="group" aria-label="Filtrar produtos por categoria">
+        <button class="filter active" type="button" data-filter="todos" aria-pressed="true">Todos</button>
+        <button class="filter" type="button" data-filter="lavagem" aria-pressed="false">Lavagem</button>
+        <button class="filter" type="button" data-filter="descontaminacao" aria-pressed="false">Descontaminação</button>
+        <button class="filter" type="button" data-filter="protecao" aria-pressed="false">Proteção e acabamento</button>
+        <button class="filter" type="button" data-filter="interior" aria-pressed="false">Interior e pneus</button>
+        <button class="filter" type="button" data-filter="acessorios" aria-pressed="false">Acessórios</button>
+      </div>
+
+      <div class="product-grid" id="product-grid">
+        <article class="product-card" data-category="protecao" data-search="restaurax vonixx restaurador plasticos externo">
+          <div class="product-photo"><img src="assets/restaurax.jpg" alt="Frascos Restaurax para restauração de plásticos" loading="lazy"><span class="product-badge">Plásticos</span></div>
+          <div class="product-info"><span class="product-brand">Vonixx</span><h3>Restaurax</h3><p>Restaurador de plásticos para renovar o acabamento.</p><div class="product-bottom"><span class="size">500 ml</span><span class="price">R$ 69,90</span></div></div>
+        </article>
+        <article class="product-card" data-category="lavagem" data-search="glazy vonixx limpador vidros 4 em 1">
+          <div class="product-photo"><img src="assets/glazy.jpg" alt="Glazy, limpador de vidros Vonixx" loading="lazy"><span class="product-badge">Vidros</span></div>
+          <div class="product-info"><span class="product-brand">Vonixx</span><h3>Glazy</h3><p>Limpador de vidros 4 em 1 para o cuidado automotivo.</p><div class="product-bottom"><span class="size">1,5 L</span><span class="price">Valor sob consulta</span></div></div>
+        </article>
+        <article class="product-card" data-category="descontaminacao" data-search="alumax vintex limpador aluminio carrocerias 5l">
+          <div class="product-photo"><img src="assets/alumax-5l.jpg" alt="Alumax, limpador de alumínio e carrocerias" loading="lazy"><span class="product-badge">Carroceria</span></div>
+          <div class="product-info"><span class="product-brand">Vintex</span><h3>Alumax</h3><p>Limpador de alumínio e carrocerias. Desincrustante ácido.</p><div class="product-bottom"><span class="size">5 L</span><span class="price">R$ 69,90</span></div></div>
+        </article>
+        <article class="product-card" data-category="descontaminacao" data-search="alumax vintex limpador aluminio carrocerias 1,5l">
+          <div class="product-photo"><img src="assets/alumax-1-5l.jpg" alt="Alumax Vintex em embalagem de 1,5 litro" loading="lazy"><span class="product-badge">Carroceria</span></div>
+          <div class="product-info"><span class="product-brand">Vintex</span><h3>Alumax</h3><p>Limpador de alumínio e carrocerias em embalagem compacta.</p><div class="product-bottom"><span class="size">1,5 L</span><span class="price">R$ 39,90</span></div></div>
+        </article>
+        <article class="product-card" data-category="lavagem" data-search="v-mol vonixx lava autos desincrustante">
+          <div class="product-photo"><img src="assets/vmol-5l.jpg" alt="V-Mol lava autos desincrustante" loading="lazy"><span class="product-badge">Lavagem</span></div>
+          <div class="product-info"><span class="product-brand">Vonixx</span><h3>V-Mol</h3><p>Lava autos desincrustante para a rotina de lavagem.</p><div class="product-bottom"><span class="size">5 L</span><span class="price">R$ 124,90</span></div></div>
+        </article>
+        <article class="product-card" data-category="interior" data-search="delet vonixx pneus borrachas limpador">
+          <div class="product-photo"><img src="assets/delet-5l.jpg" alt="Delet, limpador para pneus e borrachas" loading="lazy"><span class="product-badge">Pneus e borrachas</span></div>
+          <div class="product-info"><span class="product-brand">Vonixx</span><h3>Delet</h3><p>Limpador para pneus e borrachas.</p><div class="product-bottom"><span class="size">5 L</span><span class="price">R$ 119,90</span></div></div>
+        </article>
+        <article class="product-card" data-category="interior" data-search="delet vonixx pneus borrachas limpador 1,5l">
+          <div class="product-photo"><img src="assets/delet-1-5l.jpg" alt="Delet Vonixx em embalagem de 1,5 litro" loading="lazy"><span class="product-badge">Pneus e borrachas</span></div>
+          <div class="product-info"><span class="product-brand">Vonixx</span><h3>Delet</h3><p>Limpador para pneus e borrachas em embalagem compacta.</p><div class="product-bottom"><span class="size">1,5 L</span><span class="price">R$ 59,90</span></div></div>
+        </article>
+        <article class="product-card" data-category="lavagem" data-search="vexus vonixx rodas motores limpador">
+          <div class="product-photo"><img src="assets/vexus-5l.jpg" alt="Vexus, limpador de rodas e motores" loading="lazy"><span class="product-badge">Rodas e motores</span></div>
+          <div class="product-info"><span class="product-brand">Vonixx</span><h3>Vexus</h3><p>Limpador de rodas e motores, em embalagem de maior volume.</p><div class="product-bottom"><span class="size">5 L</span><span class="price">R$ 109,90</span></div></div>
+        </article>
+        <article class="product-card" data-category="protecao" data-search="tok final vonixx cera rapida carnauba">
+          <div class="product-photo"><img src="assets/tok-final.jpg" alt="Tok Final, cera rápida de carnaúba" loading="lazy"><span class="product-badge">Cera rápida</span></div>
+          <div class="product-info"><span class="product-brand">Vonixx</span><h3>Carnaúba Tok Final</h3><p>Cera rápida de carnaúba para o acabamento da pintura.</p><div class="product-bottom"><span class="size">500 ml</span><span class="price">R$ 39,90</span></div></div>
+        </article>
+        <article class="product-card" data-category="protecao" data-search="verniz de motor vonixx filme proteção motor">
+          <div class="product-photo"><img src="assets/verniz-de-motor.jpg" alt="Verniz de Motor Vonixx" loading="lazy"><span class="product-badge">Motor</span></div>
+          <div class="product-info"><span class="product-brand">Vonixx</span><h3>Verniz de Motor</h3><p>Filme de proteção para o cuidado do compartimento do motor.</p><div class="product-bottom"><span class="size">1,5 L</span><span class="price">R$ 109,90</span></div></div>
+        </article>
+        <article class="product-card" data-category="lavagem" data-search="v-floc vonixx lava autos concentrado">
+          <div class="product-photo"><img src="assets/vfloc-5l.jpg" alt="V-Floc, lava autos concentrado" loading="lazy"><span class="product-badge">Lavagem</span></div>
+          <div class="product-info"><span class="product-brand">Vonixx</span><h3>V-Floc</h3><p>Lava autos concentrado para a etapa de lavagem.</p><div class="product-bottom"><span class="size">5 L</span><span class="price">R$ 149,90</span></div></div>
+        </article>
+        <article class="product-card" data-category="lavagem" data-search="v-floc vonixx lava autos concentrado 1,5l">
+          <div class="product-photo"><img src="assets/vfloc-5l.jpg" alt="V-Floc Vonixx, foto do produto" loading="lazy"><span class="product-badge">Lavagem</span></div>
+          <div class="product-info"><span class="product-brand">Vonixx</span><h3>V-Floc</h3><p>Lava autos concentrado. Consulte a embalagem disponível.</p><div class="product-bottom"><span class="size">1,5 L</span><span class="price">R$ 69,90</span></div></div>
+        </article>
+        <article class="product-card" data-category="lavagem" data-search="sintra vonixx limpador bactericida">
+          <div class="product-photo"><img src="assets/sintra-5l.jpg" alt="Sintra Pro, limpador bactericida" loading="lazy"><span class="product-badge">Limpeza</span></div>
+          <div class="product-info"><span class="product-brand">Vonixx</span><h3>Sintra Pro</h3><p>Limpador bactericida para a limpeza automotiva.</p><div class="product-bottom"><span class="size">5 L</span><span class="price">Valor sob consulta</span></div></div>
+        </article>
+        <article class="product-card" data-category="lavagem" data-search="ultra limpador magil clean uso geral">
+          <div class="product-photo"><img src="assets/ultra-limpador-5l.jpg" alt="Magil Clean Ultra Limpador de uso geral" loading="lazy"><span class="product-badge">Uso geral</span></div>
+          <div class="product-info"><span class="product-brand">Magil Clean</span><h3>Ultra Limpador</h3><p>Limpador de uso geral para diferentes etapas da limpeza.</p><div class="product-bottom"><span class="size">5 L</span><span class="price">R$ 139,90</span></div></div>
+        </article>
+        <article class="product-card" data-category="lavagem" data-search="million autolimpe apc multiuso">
+          <div class="product-photo"><img src="assets/million-apc.jpg" alt="Million, APC multiuso Autolimpe" loading="lazy"><span class="product-badge">Multiuso</span></div>
+          <div class="product-info"><span class="product-brand">Autolimpe</span><h3>Million</h3><p>APC multiuso para limpeza automotiva.</p><div class="product-bottom"><span class="size">750 ml</span><span class="price">Valor sob consulta</span></div></div>
+        </article>
+        <article class="product-card" data-category="descontaminacao" data-search="izer vonixx limpador ferroso fallout remover">
+          <div class="product-photo"><img src="assets/izer.jpg" alt="Izer, limpador ferroso" loading="lazy"><span class="product-badge">Descontaminação</span></div>
+          <div class="product-info"><span class="product-brand">Vonixx</span><h3>Izer</h3><p>Limpador ferroso para remoção de partículas de ferro.</p><div class="product-bottom"><span class="size">500 ml</span><span class="price">Valor sob consulta</span></div></div>
+        </article>
+        <article class="product-card" data-category="protecao" data-search="prizm vonixx restaurador vidros">
+          <div class="product-photo"><img src="assets/prizm.jpg" alt="Prizm, restaurador de vidros" loading="lazy"><span class="product-badge">Vidros</span></div>
+          <div class="product-info"><span class="product-brand">Vonixx</span><h3>Prizm</h3><p>Restaurador de vidros para o cuidado das superfícies envidraçadas.</p><div class="product-bottom"><span class="size">500 ml</span><span class="price">R$ 39,90</span></div></div>
+        </article>
+        <article class="product-card" data-category="protecao" data-search="verniz pro autolimpe finalizador motor chassi caixa roda">
+          <div class="product-photo"><img src="assets/verniz-pro.jpg" alt="Verniz Pro finalizador automotivo" loading="lazy"><span class="product-badge">Finalizador</span></div>
+          <div class="product-info"><span class="product-brand">Autolimpe</span><h3>Verniz Pro</h3><p>Verniz finalizador para motor, chassi e caixa de roda.</p><div class="product-bottom"><span class="size">750 ml</span><span class="price">Valor sob consulta</span></div></div>
+        </article>
+        <article class="product-card" data-category="interior" data-search="black berry magil clean selante pneu">
+          <div class="product-photo"><img src="assets/black-berry.jpg" alt="Black Berry, selante para pneu" loading="lazy"><span class="product-badge">Pneus</span></div>
+          <div class="product-info"><span class="product-brand">Magil Clean</span><h3>Black Berry</h3><p>Selante para pneus com acabamento brilhante.</p><div class="product-bottom"><span class="size">500 ml</span><span class="price">Valor sob consulta</span></div></div>
+        </article>
+        <article class="product-card" data-category="descontaminacao" data-search="strike vonixx removedor piche cola">
+          <div class="product-photo"><img src="assets/strike.jpg" alt="Strike, removedor de piche e cola" loading="lazy"><span class="product-badge">Removedor</span></div>
+          <div class="product-info"><span class="product-brand">Vonixx</span><h3>Strike</h3><p>Removedor de piche e cola para superfícies automotivas.</p><div class="product-bottom"><span class="size">500 ml</span><span class="price">Valor sob consulta</span></div></div>
+        </article>
+        <article class="product-card" data-category="interior" data-search="intense vonixx plásticos internos protetor">
+          <div class="product-photo"><img src="assets/intense.jpg" alt="Intense, protetor de plásticos internos" loading="lazy"><span class="product-badge">Interior</span></div>
+          <div class="product-info"><span class="product-brand">Vonixx</span><h3>Intense</h3><p>Protetor de plásticos internos com acabamento renovado.</p><div class="product-bottom"><span class="size">500 ml</span><span class="price">Valor sob consulta</span></div></div>
+        </article>
+        <article class="product-card" data-category="descontaminacao" data-search="removex vintex desengraxante limpador chassis 5l">
+          <div class="product-photo"><img src="assets/removex.jpg" alt="Removex, desengraxante e limpador de chassis" loading="lazy"><span class="product-badge">Chassi</span></div>
+          <div class="product-info"><span class="product-brand">Vintex</span><h3>Removex</h3><p>Desengraxante e limpador de chassi.</p><div class="product-bottom"><span class="size">5 L</span><span class="price">R$ 69,90</span></div></div>
+        </article>
+        <article class="product-card" data-category="descontaminacao" data-search="removex vintex desengraxante limpador chassis 1,5l">
+          <div class="product-photo"><img src="assets/removex-1-5l.jpg" alt="Removex Vintex em embalagem de 1,5 litro" loading="lazy"><span class="product-badge">Chassi</span></div>
+          <div class="product-info"><span class="product-brand">Vintex</span><h3>Removex</h3><p>Desengraxante e limpador de chassi em embalagem compacta.</p><div class="product-bottom"><span class="size">1,5 L</span><span class="price">R$ 39,90</span></div></div>
+        </article>
+        <article class="product-card" data-category="descontaminacao" data-search="hfx extreme autolimpe desincrustante ácido">
+          <div class="product-photo"><img src="assets/hfx-extreme.jpg" alt="HFX Extreme, desincrustante ácido concentrado" loading="lazy"><span class="product-badge">Concentrado</span></div>
+          <div class="product-info"><span class="product-brand">Autolimpe</span><h3>HFX Extreme</h3><p>Desincrustante ácido concentrado para limpeza pesada.</p><div class="product-bottom"><span class="size">1 L</span><span class="price">Valor sob consulta</span></div></div>
+        </article>
+        <article class="product-card" data-category="descontaminacao" data-search="acid pro autolimpe solução ácida limpeza pesada ferrugem metal">
+          <div class="product-photo"><img src="assets/acid-pro.jpg" alt="Acid Pro, solução ácida para limpeza pesada" loading="lazy"><span class="product-badge">Limpeza pesada</span></div>
+          <div class="product-info"><span class="product-brand">Autolimpe</span><h3>Acid Pro</h3><p>Solução ácida indicada no rótulo para limpeza pesada.</p><div class="product-bottom"><span class="size">Consulte tamanhos</span><span class="price">Valor sob consulta</span></div></div>
+        </article>
+        <article class="product-card" data-category="descontaminacao" data-search="dx extreme autolimpe desengraxante alcalino">
+          <div class="product-photo"><img src="assets/dx-extreme.jpg" alt="DX Extreme, desengraxante alcalino" loading="lazy"><span class="product-badge">Desengraxante</span></div>
+          <div class="product-info"><span class="product-brand">Autolimpe</span><h3>DX Extreme</h3><p>Desengraxante alcalino para superfícies e equipamentos.</p><div class="product-bottom"><span class="size">Consulte tamanhos</span><span class="price">Valor sob consulta</span></div></div>
+        </article>
+        <article class="product-card" data-category="lavagem" data-search="foam gloss magil clean lava auto cerâmico">
+          <div class="product-photo"><img src="assets/foam-gloss.jpg" alt="Foam Gloss, lava auto cerâmico" loading="lazy"><span class="product-badge">Lava auto</span></div>
+          <div class="product-info"><span class="product-brand">Magil Clean</span><h3>Foam Gloss</h3><p>Lava auto cerâmico com SiO₂ ativado.</p><div class="product-bottom"><span class="size">1 L</span><span class="price">Valor sob consulta</span></div></div>
+        </article>
+        <article class="product-card" data-category="protecao" data-search="blend vonixx ceramic carnauba spray wax cera">
+          <div class="product-photo"><img src="assets/blend.jpg" alt="Blend, cera spray de cerâmica e carnaúba" loading="lazy"><span class="product-badge">Proteção</span></div>
+          <div class="product-info"><span class="product-brand">Vonixx</span><h3>Blend</h3><p>Cera spray com cerâmica e carnaúba.</p><div class="product-bottom"><span class="size">500 ml</span><span class="price">Valor sob consulta</span></div></div>
+        </article>
+        <article class="product-card" data-category="interior" data-search="pneu pretinho vintex brilho pneus">
+          <div class="product-photo"><img src="assets/pneu-pretinho.jpg" alt="Pneu Pretinho Vintex" loading="lazy"><span class="product-badge">Pneus</span></div>
+          <div class="product-info"><span class="product-brand">Vintex</span><h3>Pneu Pretinho</h3><p>Finalizador para pneus com brilho intenso e duradouro.</p><div class="product-bottom"><span class="size">1,5 L</span><span class="price">R$ 39,90</span></div></div>
+        </article>
+        <article class="product-card" data-category="interior" data-search="pneu pretinho vintex brilho pneus 5l">
+          <div class="product-photo"><img src="assets/pneu-pretinho.jpg" alt="Pneu Pretinho Vintex, foto do produto" loading="lazy"><span class="product-badge">Pneus</span></div>
+          <div class="product-info"><span class="product-brand">Vintex</span><h3>Pneu Pretinho</h3><p>Finalizador para pneus com brilho intenso e duradouro.</p><div class="product-bottom"><span class="size">5 L</span><span class="price">R$ 69,90</span></div></div>
+        </article>
+        <article class="product-card" data-category="acessorios" data-search="escovas pincéis aplicadores detalhamento automotivo">
+          <div class="product-photo"><img src="assets/escovas-e-aplicadores.jpg" alt="Conjunto de escovas, pincéis e aplicadores para detalhamento" loading="lazy"><span class="product-badge">Acessórios</span></div>
+          <div class="product-info"><span class="product-brand">Vonixx</span><h3>Pincel Vonixx</h3><p>Pincel para auxiliar na limpeza de áreas e detalhes.</p><div class="product-bottom"><span class="size">Unidade</span><span class="price">R$ 15,00</span></div></div>
+        </article>
+        <article class="product-card" data-category="acessorios" data-search="bucha aplicadora aplicador detalhamento automotivo">
+          <div class="product-photo"><img src="assets/bucha-aplicadora.jpg" alt="Bucha aplicadora para detalhamento automotivo" loading="lazy"><span class="product-badge">Acessórios</span></div>
+          <div class="product-info"><span class="product-brand">Acessórios</span><h3>Bucha aplicadora</h3><p>Aplicador para espalhar produtos durante o detalhamento.</p><div class="product-bottom"><span class="size">Unidade</span><span class="price">R$ 5,00</span></div></div>
+        </article>
+        <article class="product-card" data-category="lavagem" data-search="vexus vonixx rodas motores limpador 1,5l">
+          <div class="product-photo"><img src="assets/vexus-1-5l.jpg" alt="Vexus, limpador de rodas e motores em 1,5 litro" loading="lazy"><span class="product-badge">Rodas e motores</span></div>
+          <div class="product-info"><span class="product-brand">Vonixx</span><h3>Vexus</h3><p>Limpador de rodas e motores em embalagem compacta.</p><div class="product-bottom"><span class="size">1,5 L</span><span class="price">R$ 49,90</span></div></div>
+        </article>
+        <article class="product-card" data-category="lavagem" data-search="v-mol vonixx lava autos desincrustante 1,5l">
+          <div class="product-photo"><img src="assets/vmol-1-5l.jpg" alt="V-Mol lava autos desincrustante em 1,5 litro" loading="lazy"><span class="product-badge">Lavagem</span></div>
+          <div class="product-info"><span class="product-brand">Vonixx</span><h3>V-Mol</h3><p>Lava autos desincrustante em embalagem compacta.</p><div class="product-bottom"><span class="size">1,5 L</span><span class="price">R$ 54,90</span></div></div>
+        </article>
+        <article class="product-card" data-category="lavagem" data-search="ultra limpador magil clean uso geral 1,15l">
+          <div class="product-photo"><img src="assets/ultra-limpador-1-15l.jpg" alt="Ultra Limpador Magil Clean em 1,15 litro" loading="lazy"><span class="product-badge">Uso geral</span></div>
+          <div class="product-info"><span class="product-brand">Magil Clean</span><h3>Ultra Limpador</h3><p>Limpador de uso geral em embalagem compacta.</p><div class="product-bottom"><span class="size">1 L</span><span class="price">R$ 64,90</span></div></div>
+        </article>
+      </div>
+      <div class="empty-state" id="empty-state">Nenhum produto encontrado. Tente outro nome ou categoria.</div>
     </section>
 
-    <section id="avaliacoes" class="container section">
-      <div class="section-head">
-        <h2>O que dizem sobre nós</h2>
-        <p>Clientes que conhecem a barbearia destacam o cuidado no atendimento e a qualidade dos serviços.</p>
-      </div>
-
-      <div class="reviews">
-        <article class="review">
-          <div class="stars">★★★★★</div>
-          <p>“Atendimento excelente, ambiente muito bom e corte impecável. Me senti muito bem atendido.”</p>
-          <div class="person">
-            <div class="avatar">A</div>
-            <strong>André</strong>
-          </div>
-        </article>
-
-        <article class="review">
-          <div class="stars">★★★★★</div>
-          <p>“Barba modelada com muito cuidado e corte moderno. O melhor da região sem dúvida.”</p>
-          <div class="person">
-            <div class="avatar">J</div>
-            <strong>João</strong>
-          </div>
-        </article>
-
-        <article class="review">
-          <div class="stars">★★★★★</div>
-          <p>“Ambiente descontraído, atendimento profissional e resultado muito acima do esperado.”</p>
-          <div class="person">
-            <div class="avatar">M</div>
-            <strong>Mateus</strong>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="contato" class="container section">
-      <div class="booking">
-        <div class="booking-card">
-          <h3>Agende seu horário</h3>
-          <p>Seja para um corte clássico, barba modelada ou um combo completo, estamos prontos para atender você com estilo e excelência.</p>
-          <a href="tel:+5588999570760" class="btn btn-primary">(88) 99957-0760</a>
+    <section class="brands" id="marcas">
+      <div class="container">
+        <div class="brands-heading">Marcas que você encontra no catálogo</div>
+        <div class="brand-logos">
+          <img src="assets/imperium-logo.jpg" alt="Imperium Detail's" loading="lazy">
+          <img src="assets/logo-vonixx.jpg" alt="Vonixx" loading="lazy">
+          <img src="assets/logo-vintex.jpg" alt="Vintex" loading="lazy">
+          <img src="assets/logo-autolimpe.jpg" alt="Autolimpe" loading="lazy">
+          <img src="assets/logo-magil-clean.jpg" alt="Magil Clean" loading="lazy">
         </div>
+      </div>
+    </section>
 
-        <div class="booking-card">
-          <h3>Localização</h3>
-          <p>R. Santa Rosa, 128 - Centro, Parambu - CE, 63680-000</p>
-          <ul class="hours">
-            <li><span>Segunda a Sexta</span> <strong>08:00 - 19:00</strong></li>
-            <li><span>Sábado</span> <strong>08:00 - 16:00</strong></li>
-            <li><span>Domingo</span> <strong>Fechado</strong></li>
-          </ul>
+    <section class="contact container" id="contato">
+      <div class="contact-box">
+        <div class="eyebrow">Atendimento Imperium</div>
+        <h2>Encontrou o que precisava?</h2>
+        <p>Consulte com a equipe da Imperium Detail's a disponibilidade dos produtos. Os preços informados já aparecem no catálogo; nas variações sem foto específica, a imagem é ilustrativa.</p>
+        <p class="contact-note"><span>Atendimento:</span> consulte disponibilidade e tire dúvidas diretamente pelo WhatsApp.</p>
+        <div class="contact-actions">
+          <a class="button" href="https://wa.me/5575998686874?text=Ol%C3%A1%2C%20vim%20pelo%20cat%C3%A1logo%20da%20Imperium%20e%20quero%20consultar%20um%20produto." target="_blank" rel="noopener noreferrer">
+            Chamar no WhatsApp <span aria-hidden="true">→</span>
+          </a>
+          <a class="contact-number" href="tel:+5575998686874">(75) 99868-6874</a>
+          <a class="instagram-link" href="https://www.instagram.com/imperiium_produtos/" target="_blank" rel="noopener noreferrer">Instagram @imperiium_produtos ↗</a>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    © 2026 Araujo Barbearia — estilo com tradição.
+    <div class="footer-row container">
+      <span class="footer-brand">Imperium Detail's</span>
+      <p>Produtos automotivos · <a class="instagram-link" href="https://www.instagram.com/imperiium_produtos/" target="_blank" rel="noopener noreferrer">Instagram</a> · WhatsApp: <a class="contact-number" href="tel:+5575998686874">(75) 99868-6874</a></p>
+      <a class="back-top" href="#inicio">Voltar ao topo ↑</a>
+    </div>
   </footer>
+
+  <script>
+    const searchInput = document.querySelector("#product-search");
+    const filterButtons = [...document.querySelectorAll(".filter")];
+    const productCards = [...document.querySelectorAll(".product-card")];
+    const resultCount = document.querySelector("#result-count");
+    const emptyState = document.querySelector("#empty-state");
+    let activeCategory = "todos";
+
+    function updateCatalog() {
+      const query = searchInput.value.trim().toLocaleLowerCase("pt-BR");
+      let visibleCount = 0;
+
+      for (const card of productCards) {
+        const matchesCategory = activeCategory === "todos" || card.dataset.category === activeCategory;
+        const matchesSearch = card.dataset.search.toLocaleLowerCase("pt-BR").includes(query);
+        const isVisible = matchesCategory && matchesSearch;
+        card.hidden = !isVisible;
+        if (isVisible) visibleCount++;
+      }
+
+      resultCount.textContent = `${visibleCount} ${visibleCount === 1 ? "produto" : "produtos"}`;
+      emptyState.classList.toggle("visible", visibleCount === 0);
+    }
+
+    for (const button of filterButtons) {
+      button.addEventListener("click", () => {
+        activeCategory = button.dataset.filter;
+        for (const item of filterButtons) {
+          const isActive = item === button;
+          item.classList.toggle("active", isActive);
+          item.setAttribute("aria-pressed", String(isActive));
+        }
+        updateCatalog();
+      });
+    }
+
+    searchInput.addEventListener("input", updateCatalog);
+    updateCatalog();
+  </script>
 </body>
 </html>
